@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="sidebar">
+        <div>
+            <p>Contents</p>
+            <a href="/">Main Page</a>
+            <ul>
+                <li><a href="/building">Building</a></li>
+                <li><a href="/contributing">Contributing</a></li>
+                <li><a href="/learning">Learning</a></li>
+                <li><a href="/kernel-api">Kernel API</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <a onclick="goBack()" style="color: blueviolet; text-decoration: underline;">Back</a>
+
+        <script>
+        function goBack() {
+          window.history.back();
+        }
+        </script>
+
+        <div class="text">{% block content %}{% endblock %}</div>
+    </div>
+</body>
+</html>

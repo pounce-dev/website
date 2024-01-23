@@ -1,0 +1,38 @@
+/*
+Classic Style
+ */
+
+body {
+    font-family: "Comic Sans MS", serif;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    width: 15%;
+    border-width: 0px 2px 0px 0px;
+    border-style: solid;
+    overflow-y: auto;
+}
+
+.content {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 15%;
+    padding-left: 5%;
+    right: 0vw;
+    overflow-y: auto;
+}
+
+.text {
+    max-width: 900px;
+    margin-right: 50px;
+}
+
+.codeblock {
+    background: #b7b4b4;
+    border-radius: 15px;
+    padding: 15px 15px 15px 15px;
+}

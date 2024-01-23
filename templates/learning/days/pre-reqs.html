@@ -1,0 +1,26 @@
+{% extends 'default_page.html' %}
+{% block title %}Prerequisites{% endblock %}
+{% block content %}
+    <h1>Prerequisites</h1>
+    <p>A list of software and knowledge to participate in the following lessons.</p>
+    <h2>Knowledge</h2>
+    <p>A knowledge of binary, hexadecimal, the operating system you are using and how to install software/run commands are all necessary in order to understand what we are doing.</p>
+    <h2>Software</h2>
+    <p>Install the following software to participate in the lessons (Latest/stable Builds should always work):</p>
+    <h3>QEMU</h3>
+    <p><a href="https://www.qemu.org/download/" target="_blank">Download here</a>. <br> Windows: Download the installer from Stefan Weil install QEMU. Once it is installed, add the path to your qemu folder (usually C:\Program Files\qemu\) into your system's environmental variables PATH.<br>
+    Linux: Install with your package manager.
+    </p>
+    <p>Check to see if it is working by running: </p>
+    <div class="codeblock">
+    <p>qemu-system-x86_64 --version</p>
+    </div>
+    <h3>NASM</h3>
+    <p><a href="https://www.nasm.us/" target="_blank">Download here</a>. <br> Windows: Use the installer provided in the stable build. <br>
+    Linux: You may install with your package manager.
+    </p>
+    <p>Check to see if it is working by running: </p>
+    <div class="codeblock">
+    <p>nasm --version</p>
+    </div>
+{% endblock %}
