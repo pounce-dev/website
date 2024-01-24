@@ -1,8 +1,8 @@
 {% extends 'default_page.html' %}
 {% block title %}Day 2: Interrupts and Registers{% endblock %}
 {% block content %}
-<!--explain what we are doing with intigers-->
     <h1>Day 2: Interrupts and Registers</h1>
+<!--explain what we are doing with interupts-->
     <h2>What are Interupts?</h2>
     <p>Imagine that you are a kid helping you dad wiht a project in the garage. He is doing the work but you are bored. You stop him and ask him to get you a juicebox. He sets down his tools, gets you your juicebox, then goes back to work.</p>
     
@@ -16,13 +16,25 @@
         <li>int 0x10 (10h) - Bios Video Services</li>
         <li>int 0x13 (13h) - Disk Services</li>
         <li>int 0x16 (16h) - Keyboard services</li>
-
     </ul>
 
     <h2>int 0x10 (10h) - Bios Video Services</h3>
 <!--Insert an example of using 'int 0x10' and an explanation of what is is-->
         
         <p>
+            10h is shorthand for BIOS interrupt call 10. In other words, its the 10th BIOS interupt call. This interupt call is responsible for opperations around the video mode. a few examples of these opperations (also called services) are:
+            <ul>
+                <li>String output</li>
+                <li>Reading and writing from/to individual pixels on the screen</li>
+                <li>Setting video modes</li>
+            </ul>
+        </p>
+        <h3>Exampl</h3>    
+
+            
+
+
+        <!--Further reading link to wikipedia Article for int 0x10. Do we want to restructure this?-->
         <a href="https://en.wikipedia.org/wiki/INT_10H">Int 0x10 (BIOS video Services) - Wikipedia </a>
         </p>
 
