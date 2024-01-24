@@ -6,7 +6,7 @@ body {
     font-family: "Comic Sans MS", serif;
     display: grid;
     grid-template-columns: 200px auto;
-    grid-template-rows: 50px auto;
+    grid-template-rows: 50px 90vh 25px;
 }
 
 /* Header */
@@ -75,6 +75,13 @@ body {
     width: 20px; /* Set the appropriate width for your images */
     height: 20px; /* Set the appropriate height for your images */
     margin-right: 8px;
+}
+
+/* Footer */
+.footer {
+    margin: 10px;
+    border-top: #2f2f2f 2px solid;
+    grid-column: 2;
 }
 
 /* Content */
