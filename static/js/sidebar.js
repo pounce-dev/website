@@ -7,4 +7,4 @@ function redirectToURL(link) {
 
 function goBack() {
     window.history.back();
-  }
+}
