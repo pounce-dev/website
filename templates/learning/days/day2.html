@@ -2,15 +2,15 @@
 {% block title %}Day 2: Interrupts and Registers{% endblock %}
 {% block content %}
     <h1>Day 2: Interrupts and Registers</h1>
-<!--explain what we are doing with interupts-->
-    <h2>What are Interupts?</h2>
-    <p>Imagine that you are a kid helping you dad wiht a project in the garage. He is doing the work but you are bored. You stop him and ask him to get you a juicebox. He sets down his tools, gets you your juicebox, then goes back to work.</p>
+<!--explain what we are doing with interrupts-->
+    <h2>What are Interrupts?</h2>
+    <p>Imagine that you are a kid helping you dad with a project in the garage. He is doing the work but you are bored. You stop him and ask him to get you a juice box. He sets down his tools, gets you your juice box, then goes back to work.</p>
     
-    <p>Congradulations! That is an interupt.</p>
+    <p>Congratulations! That is an interrupt.</p>
 
-    <p> In our scenario, your dad was the CPU. He was following instructions and working on a big task. You tapping him on the sholder was INTERUPTING him. He stopped what he was doing and left what he was doing on his workbench. He then took care of the time sensitive task. When he was done, he picked back up where he left off.</p>
+    <p> In our scenario, your dad was the CPU. He was following instructions and working on a big task. When you tapped him on the shoulder was <i>interrupting</i> him. He stopped what he was doing and left what he was doing on his workbench. He then took care of the time sensitive task. When he was done, he picked back up where he left off.</p>
 
-    <p>We will talk about 3 types of interupts today but there are tons more that you can discover on your own. The three that we will talk about today are:</p>
+    <p>We will talk about 3 types of interrupts today but there are tons more that you can discover on your own. The three that we will talk about today are:</p>
 
     <ul> 
         <li>int 0x10 (10h) - Bios Video Services</li>
@@ -18,36 +18,35 @@
         <li>int 0x16 (16h) - Keyboard services</li>
     </ul>
 
-    <h2>int 0x10 (10h) - Bios Video Services</h3>
-<!--Insert an example of using 'int 0x10' and an explanation of what is is-->
-        
-        <p>
-            10h is shorthand for BIOS interrupt call 10. In other words, its the 10th BIOS interupt call. This interupt call is responsible for opperations around the video mode. a few examples of these opperations (also called services) are:
-            <ul>
-                <li>String output</li>
-                <li>Reading and writing from/to individual pixels on the screen</li>
-                <li>Setting video modes</li>
-            </ul>
-        </p>
-        <h3>Exampl</h3>    
+    <h2>int 0x10 (10h) - Bios Video Services</h2>
+<!--Insert an example of using 'int 0x10' and an explanation of what it is-->
+    <p>
+            10h is shorthand for BIOS interrupt call 10. In other words, it's the 10th BIOS interrupt call. This interrupt call is responsible for operations around the video mode. a few examples of these operations (also called services) are:
+        <ul>
+            <li>String output</li>
+            <li>Reading and writing from/to individual pixels on the screen</li>
+            <li>Setting video modes</li>
+        </ul>
+    </p>
+
+        <h3>Example</h3>
 
             
 
 
         <!--Further reading link to wikipedia Article for int 0x10. Do we want to restructure this?-->
         <a href="https://en.wikipedia.org/wiki/INT_10H">Int 0x10 (BIOS video Services) - Wikipedia </a>
-        </p>
 
 
     <h2> int 0x13 (13h) - Disk Services </h2>  
-<!--Insert an example of using 'int 0x13' and an explanation of what is is-->
+<!--Insert an example of using 'int 0x13' and an explanation of what it is-->
 
     <a href="https://en.wikipedia.org/wiki/INT_13H"> int 0x13 (Disk Services) - Wikipedia </a>
     <p> </p>
     
     
     <h2>int 0x16 (16h) - Keyboard services</h2>
-<!--Insert an example of using 'int 0x16' and an explanation of what is is-->
+<!--Insert an example of using 'int 0x16' and an explanation of what it is-->
 
     <a href="https://en.wikipedia.org/wiki/INT_16H"> int 0x16 (Keyboard Services) - Wikipedia</a>
     <p>    </p>
