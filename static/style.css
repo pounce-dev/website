@@ -4,20 +4,91 @@ Classic Style
 
 body {
     font-family: "Comic Sans MS", serif;
+    display: grid;
+    grid-template-columns: 200px auto;
+    grid-template-rows: 50px 90vh 25px;
 }
 
-.sidebar {
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    width: 15%;
-    border-width: 0px 2px 0px 0px;
-    border-style: solid;
-    overflow-y: auto;
+/* Header */
+.header {
+    margin: 10px;
+    border-bottom: #2f2f2f 2px solid;
+    grid-column: 2;
 }
+
+/* Sidebar Content */
+.sidebar {
+    top: 0px;
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    background-color: #111;
+    padding-top: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.logo-container img {
+    width: 75%;
+}
+
+.sidebar-title{
+    font-size: 1.5em;
+    margin-top: 0%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sidebar_item{
+    padding: 10px;
+    color: #eee; /* Slightly whiter color */
+    font-size: 1.2em;
+    text-decoration: none;
+    display: flex; /* Use flexbox */
+    align-items: center; /* Center content vertically */
+}
+
+.sidebar .sidebar_item:hover {
+    background-color: #2f2f2f;
+    cursor: pointer;
+    transform: scale(1.1); /* Grow by 10% on hover */
+}
+
+.sidebar_item.active {
+    background-color: #333; /* Highlight color for the active page */
+}
+
+.sidebar_item.active:hover {
+    opacity: 1; /* Maintain full opacity on hover for the active page */
+}
+
+.sidebar .icon {
+    width: 20px; /* Set the appropriate width for your images */
+    height: 20px; /* Set the appropriate height for your images */
+    margin-right: 8px;
+}
+
+/* Footer */
+.footer {
+    margin: 10px;
+    border-top: #2f2f2f 2px solid;
+    grid-column: 2;
+}
+
+/* Content */
 
 .content {
-    position: fixed;
+    /* position: fixed; */
+    grid-column: 2;
     top: 0px;
     bottom: 0px;
     left: 15%;

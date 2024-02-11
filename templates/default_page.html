@@ -4,30 +4,52 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>{% block title %}{% endblock %}</title>
+    <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 </head>
 <body>
+    <div class="header">
+        <a onclick="goBack()" style="color: blueviolet; text-decoration: underline;">Back</a>
+    </div>
     <div class="sidebar">
+        <div class="logo-container" onclick="redirectToURL('/')">
+            <img src="{{ url_for('static', filename='img/kitty-logo-white.png') }}" alt="Logo" class="logo">
+            <p class="sidebar-title">Kitty Kernal</p>
+        </div>
         <div>
-            <p>Contents</p>
-            <a href="/">Main Page</a>
-            <ul>
-                <li><a href="/building">Building</a></li>
-                <li><a href="/contributing">Contributing</a></li>
-                <li><a href="/learning">Learning</a></li>
-                <li><a href="/kernel-api">Kernel API</a></li>
-            </ul>
+            <div class="sidebar_item" onclick="redirectToURL('/')">
+                <img class="icon" src="{{ url_for('static', filename='img/home-icon.png') }}" alt="Home">
+                <p>Main Page</p>
+            </div>
+            <div class="sidebar_item" onclick="redirectToURL('/building')">
+                <img class="icon" src="{{ url_for('static', filename='img/hammer-icon.png') }}" alt="Building">
+                <p>Building</p>
+            </div>
+            <div class="sidebar_item" onclick="redirectToURL('/contributing')">
+                <img class="icon" src="{{ url_for('static', filename='img/handshake.png') }}" alt="Contributing">
+                <p>Contributing</p>
+            </div>
+            <div class="sidebar_item" onclick="redirectToURL('/learning')">
+                <img class="icon" src="{{ url_for('static', filename='img/brain.png') }}" alt="Learning">
+                <p>Learning</p>
+            </div>
+            <div class="sidebar_item" onclick="redirectToURL('/kernel-api')">
+                <img class="icon" src="{{ url_for('static', filename='img/console.png') }}" alt="Kernel API">
+                <p>Kernel API</p>
+            </div>
+            <script>
+                function redirectToURL(link) {
+                    console.log("Redirecting to:", link);
+                    window.location.href = link;
+                }
+            </script>
         </div>
     </div>
     <div class="content">
-        <a onclick="goBack()" style="color: blueviolet; text-decoration: underline;">Back</a>
-
-        <script>
-        function goBack() {
-          window.history.back();
-        }
-        </script>
-
         <div class="text">{% block content %}{% endblock %}</div>
+    </div>
+    <div class="footer">
+        <p>Images by <a href="https://icons8.com/">Icons8</a> under <a href="https://creativecommons.org/licenses/by-nd/3.0/">Creative Commons Attribution-NoDerivs 3.0</a></p>
     </div>
 </body>
 </html>
