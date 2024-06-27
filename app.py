@@ -25,13 +25,16 @@ def contributing():
 def learning():
     return render_template('learning/index.html')
 
+
 @app.route('/learning/days/<day>')
 def learning_day(day):
     return render_template(f'learning/days/{escape(day)}')
 
+
 @app.route('/learning/downloads/<file>')
 def learning_file(file):
     return send_file(f'./static/learning/downloads/{escape(file)}', as_attachment=True)
+
 
 @app.route('/kernel-api/')
 def kernel_api():
