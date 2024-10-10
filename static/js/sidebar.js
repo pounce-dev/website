@@ -4,7 +4,3 @@ function redirectToURL(link) {
     console.log("Redirecting to:", link);
     window.location.href = link;
 }
-
-function goBack() {
-    window.history.back();
-}
