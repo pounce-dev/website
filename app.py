@@ -2,6 +2,7 @@ import os.path
 
 from flask import Flask, render_template, send_file
 from markupsafe import escape
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
 
@@ -40,6 +41,9 @@ def learning_file(file):
 def kernel_api():
     return render_template('kernel-api/index.html')
 
+app.wsgi_app = ProxyFix(
+    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+)
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 if __name__ == '__main__':
