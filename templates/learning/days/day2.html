@@ -21,33 +21,46 @@
     <h2>int 0x10 (10h) - Bios Video Services</h2>
 <!--Insert an example of using 'int 0x10' and an explanation of what it is-->
     <p>
-            10h is shorthand for BIOS interrupt call 10. In other words, it's the 10th BIOS interrupt call. This interrupt call is responsible for operations around the video mode. a few examples of these operations (also called services) are:
+            "int" 10h is shorthand for BIOS interrupt call 0x10. This interrupt call is responsible for operations around the video mode. Examples of these operations (also called services) are:
         <ul>
             <li>String output</li>
             <li>Reading and writing from/to individual pixels on the screen</li>
             <li>Setting video modes</li>
         </ul>
     </p>
-
-        <h3>Example</h3>
-
-            
-
-
         <!--Further reading link to wikipedia Article for int 0x10. Do we want to restructure this?-->
-        <a href="https://en.wikipedia.org/wiki/INT_10H">Int 0x10 (BIOS video Services) - Wikipedia </a>
+        <a href="https://en.wikipedia.org/wiki/INT_10H" target="_blank">Int 0x10 (BIOS video Services) - Wikipedia </a>
 
 
     <h2> int 0x13 (13h) - Disk Services </h2>  
 <!--Insert an example of using 'int 0x13' and an explanation of what it is-->
 
-    <a href="https://en.wikipedia.org/wiki/INT_13H"> int 0x13 (Disk Services) - Wikipedia </a>
+    <p>"int 13h" is shorthand for BIOS interrupt call 0x13. This interrupt call is responsible for reading and writing sectors (512 bytes) to the disk.</p>
+
+    <a href="https://en.wikipedia.org/wiki/INT_13H" target="_blank"> int 0x13 (Disk Services) - Wikipedia </a>
     <p> </p>
     
     
     <h2>int 0x16 (16h) - Keyboard services</h2>
 <!--Insert an example of using 'int 0x16' and an explanation of what it is-->
 
-    <a href="https://en.wikipedia.org/wiki/INT_16H"> int 0x16 (Keyboard Services) - Wikipedia</a>
-    <p>    </p>
+    <p>"int 16h" is shorthand for BIOS interrupt call 0x16. This interrupt call is responsible for getting keystrokes or the keyboard buffer and clearing it.</p>
+
+    <a href="https://en.wikipedia.org/wiki/INT_16H" target="_blank"> int 0x16 (Keyboard Services) - Wikipedia</a>
+    <h2>Using the interrupts</h2>
+    <p>Save the following file as "boot_functions.asm".</p>
+    <a href="/learning/downloads/boot_functions.asm">boot_functions.asm</a>
+    <p>Take a look at the code inside, and note how they call the bios functions for storage, keyboard, and video.</p>
+    <p>Now, download the file "boot_sector.asm" and put it inside the same directory as the previous file.</p>
+        <a href="/learning/downloads/boot_sector.asm">boot_sector.asm</a>
+    <p>You can run it with the following two commands:</p>
+    <div class="codeblock"><p>
+        nasm boot_sector.asm -fbin -o boot_sector.bin<br>
+        qemu-system-x86_64 .\boot_sector.bin
+    </p></div>
+    <p>Pay attention to the output. How is the string stored in sector 2 printed? How did it get to address 0x8000?</p>
+    <img src="{{ url_for('static', filename='learning/day2/SECTORS.svg') }}" alt="Sector and RAM diagram" width="100%">
+    <p>You can figure out how far a sector needs to be mapped from out first sector (located at 0x7C00) by adding 512 to it. <br>You can use any calculator (like the built in windows one) with hex capabilities. Here's a browser based one:</p>
+    <a href="https://rinkcalc.app/" target="_blank"> Rink Calculator</a>
+    <p>To add with rink, try "0x7c00 + 512 in hex".</p>
 {% endblock %}
