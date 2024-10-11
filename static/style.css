@@ -5,13 +5,15 @@ Classic Style
 body {
     font-family: "Comic Sans MS", serif;
     display: grid;
+    margin-top: 0;
+    margin-bottom: 0;
     grid-template-columns: 200px auto;
     grid-template-rows: 50px 90vh 25px;
 }
 
 /* Header */
 .header {
-    margin: 10px;
+    margin: 10px 10px 0px 10px;
     border-bottom: #2f2f2f 2px solid;
     grid-column: 2;
 }
@@ -79,7 +81,7 @@ body {
 
 /* Footer */
 .footer {
-    margin: 10px;
+    margin: 0px 10px 10px 10px;
     border-top: #2f2f2f 2px solid;
     grid-column: 2;
 }
