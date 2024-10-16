@@ -1,0 +1,29 @@
+{% extends 'default_page.html' %}
+{% block title %}Day 3: Debugging and Reverse Engineering{% endblock %}
+{% block content %}
+    <h1>Day 3: Debugging and Reverse Engineering</h1>
+    <h2>Challenge instructions</h2>
+    <p>For this lesson, you'll need the following two tools:</p>
+    <ul>
+    <li><p><a href="https://github.com/NationalSecurityAgency/ghidra/releases">Ghidra</a>, a tool made by the NSA for reverse engineering software on tons of architectures</p></li>
+        <ul>
+            <li><p>You need java to run this! Follow the installation instructions on the Ghidra page!</p></li>
+        </ul>
+        <li><p>The GNU debugger, a tool made by GNU project for debugging, commonly referred to as GDB.</p>
+            <ul>
+                <li><p>Linux: Install with your package manager.</p></li>
+                <li><p>Windows: Install MSYS2 and use mingw-w64-gdb.</p></li>
+                <li><p>MacOS: use brew (untested).</p></li>
+            </ul>
+        </li>
+    </ul>
+    <p>For each challenge, you will download a file and either inspect it with Ghidra or load it in to QEMU and debug it with GDB. Each flag begins with "CTF-" and ends with ";".</p>
+    <h2>Challenges 1-2: GDB</h2>
+    <h3>Challenge 1: String on the Heap</h3>
+    <p>To play this challenge, download the following file: <a href="/learning/downloads/os-image-ctf1.bin">os-image-ctf1.bin</a></p>
+    <p>The heap in our kitty kernel starts at 0x10000. Can we read that memory?</p>
+    <h3>Challenge 2: Calling a function</h3>
+    <p>To play this challenge, download the following file: <a href="/learning/downloads/boot_sector-ctf2.bin">boot_sector-ctf2.bin</a></p>
+    <p>Our boot sector is loaded at 0x7c00, and in the third sector there exists a function to load in the second sector and print a string located there. Can we call that function?</p>
+
+{% endblock %}
