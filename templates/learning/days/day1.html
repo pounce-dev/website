@@ -1,72 +1,103 @@
 {% extends 'default_page.html' %}
 {% block title %}Day 1: Binary, Storage, and Memory{% endblock %}
 {% block content %}
-    <h1>Day 1: Binary, Storage, and Memory</h1>
-    <p>The first step to learning how to write an operating system is knowing how the computer processes data. That means understanding how it stores data and how it manipulates it. It is recommended that you download the material from <a href="/learning/days/pre-reqs.html"></a></p>
-    <h2>BIOS and RAM</h2>
-    <p>When you connect a Hard Drive Disk (HDD), Compact Disk (CD), Solid State Drive (SSD), USB Storage device, etc. with an operating system to a computer, you can usually select the
-    disk in a BIOS menu (Try pressing F2, F10, F11, etc. when booting). One of these devices is commonly referred to as a "storage medium". The BIOS will load the first sector from the selected drive
-    into your Random Access Memory (RAM). A sector is equivalent to 512 bytes in length, and thus it occupies 512 memory addresses in your RAM.</p>
-    <h2>Our first boot sector</h2>
-    <p>When the BIOS loads in the first sector, it does NOT load it into address 0x0. It loads it into address 0x7c00, and therefore the boot sector code lives from 0x7c00 to 0x7e00 (512 bytes).
-    There is one more caveat: The BIOS will only load and run this section if it ends in 0x55AA. If the condition above is met, then the BIOS will tell the CPU to jump to 0x7c00, and we will start in 16-bit real mode.</p>
-    <a href="/learning/downloads/bootsect.asm">bootsect.asm</a>
-    <div class="codeblock"><p>
-[bits 16]<br>
-[org 0x7c00]<br>
-<br>
-mov ah, 0x0e<br>
-mov al, 'H'<br>
-int 0x10<br>
-<br>
-times 510 - ($ - $$) db 0<br>
-dw 0xAA55<br>
-    </p>
-    </div>
-    <h2>Running the boot sector</h2>
-    <p>Let's run this code in QEMU, a virtual machine software. Download bootsect.asm, and run the following commands in the directory you downloaded it to:</p>
-    <div class="codeblock">
-        <p>nasm -fbin bootsect.asm -o bootsect.bin</p>
-        <p>qemu-system-x86_64 -fda bootsect.bin</p>
-    </div>
-    <p>If all is good, an 'H' should be displayed after the BIOS message "Booting from floppy".</p>
-    <h2>Where is our data going?</h2>
-    <img src="{{ url_for('static', filename='learning/day1/storage_ram_cpu.svg') }}" alt="Storage Ram CPU Data Diagram" width="100%">
-    <p>At boot, the first sector of data (512 bytes) is moved from the storage disk to RAM automatically by the BIOS. This first sector is located in ram from 0x7c00 to 0x7e00.</p>
-    <p>The data in memory can not be altered by the CPU directly, it has to be loaded into a register (on the CPU) using the 'mov' instruction, and then data in registers can be acted upon using things like add, sub, mul, etc.</p>
-    <p>In our code, we use the registers as parameters for a BIOS video interrupt. Please continue to Day 2 to learn more about interrupts.</p>
-    <h2>Understanding the code</h2>
-    <p>Let's go through our boot sector line by line, and compare it to what we learned in above.</p>
-    <div class="codeblock">
-    <p>[bits 16]</p>
-    </div>
-    <p>This line does not end up in the assembled code. It is telling NASM (the assembler) that we are in 16 bits. This way it doesn't try to use anything when assembling that wouldn't work on our processor, as it starts in 16-bit real mode.</p>
-    <div class="codeblock">
-    <p>[org 0x7c00]</p>
-    </div>
-    <p>This line also doesn't end up in the assembled code. It tells the assembler that the binary we produce will be placed at 0x7c00 in memory.</p>
-    <div class="codeblock">
-    <p>mov ah, 0x0e<br>
-    mov al, 'H'
-    </p>
-    </div>
-    <p>"mov" is an instruction on x86 that moves data between registers and loads/stores data to and from RAM. In these lines, it is moving the value 0x0e into register "ah", and the value 'H' (ASCII) into the register "al"</p>
-    <div class="codeblock">
+<h1>Day 1: Binary, Storage, and Memory</h1>
+<p>The first step to learning how to write an operating system is knowing how the computer processes data. That means
+    understanding how it stores data and how it manipulates it. It is recommended that you download the material from <a
+        href="/learning/days/pre-reqs.html"></a></p>
+<h2>BIOS and RAM</h2>
+<p>When you connect a Hard Drive Disk (HDD), Compact Disk (CD), Solid State Drive (SSD), USB Storage device, etc. with
+    an operating system to a computer, you can usually select the
+    disk in a BIOS menu (Try pressing F2, F10, F11, etc. when booting). One of these devices is commonly referred to as
+    a "storage medium". The BIOS will load the first sector from the selected drive
+    into your Random Access Memory (RAM). A sector is equivalent to 512 bytes in length, and thus it occupies 512 memory
+    addresses in your RAM.</p>
+<h2>Our first boot sector</h2>
+<p>When the BIOS loads in the first sector, it does NOT load it into address 0x0. It loads it into address 0x7c00, and
+    therefore the boot sector code lives from 0x7c00 to 0x7e00 (512 bytes).
+    There is one more caveat: The BIOS will only load and run this section if it ends in 0x55AA. If the condition above
+    is met, then the BIOS will tell the CPU to jump to 0x7c00, and we will start in 16-bit real mode.</p>
+<a href="/learning/downloads/bootsect.asm">bootsect.asm</a>
+<div class="codeblock">
     <p>
-    int 0x10
+        [bits 16]<br>
+        [org 0x7c00]<br>
+        <br>
+        mov ah, 0x0e<br>
+        mov al, 'H'<br>
+        int 0x10<br>
+        <br>
+        times 510 - ($ - $$) db 0<br>
+        dw 0xAA55<br>
     </p>
-    </div>
-    <p>This instruction calls interrupt 0x10, the <a href="https://en.wikipedia.org/wiki/INT_10H" target="_blank">BIOS interrupt for video services</a>. It uses the data in the ah and al registers. 0x0e is the teletype output mode, 'H' is the data that gets printed.</p>
-    <div class="codeblock">
+</div>
+<h2>Running the boot sector</h2>
+<p>Let's run this code in QEMU, a virtual machine software. Download bootsect.asm, and run the following commands in the
+    directory you downloaded it to:</p>
+<div class="codeblock">
+    <p>nasm -fbin bootsect.asm -o bootsect.bin</p>
+    <p>qemu-system-x86_64 -fda bootsect.bin</p>
+</div>
+<p>If all is good, an 'H' should be displayed after the BIOS message "Booting from floppy".</p>
+<h2>Where is our data going?</h2>
+<img src="{{ url_for('static', filename='learning/day1/storage_ram_cpu.svg') }}" alt="Storage Ram CPU Data Diagram"
+    width="100%">
+<p>At boot, the first sector of data (512 bytes) is moved from the storage disk to RAM automatically by the BIOS. This
+    first sector is located in ram from 0x7c00 to 0x7e00.</p>
+<p>The data in memory can not be altered by the CPU directly, it has to be loaded into a register (on the CPU) using the
+    'mov' instruction, and then data in registers can be acted upon using things like add, sub, mul, etc.</p>
+<p>In our code, we use the registers as parameters for a BIOS video interrupt. Please continue to Day 2 to learn more
+    about interrupts.</p>
+<h2>Understanding the code</h2>
+<p>Let's go through our boot sector line by line, and compare it to what we learned in above.</p>
+<div class="codeblock">
+    <p>[bits 16]</p>
+</div>
+<p>This line does not end up in the assembled code. It is telling NASM (the assembler) that we are in 16 bits. This way
+    it doesn't try to use anything when assembling that wouldn't work on our processor, as it starts in 16-bit real
+    mode.</p>
+<div class="codeblock">
+    <p>[org 0x7c00]</p>
+</div>
+<p>This line also doesn't end up in the assembled code. It tells the assembler that the binary we produce will be placed
+    at 0x7c00 in memory.</p>
+<div class="codeblock">
+    <p>mov ah, 0x0e<br>
+        mov al, 'H'
+    </p>
+</div>
+<p>"mov" is an instruction on x86 that moves data between registers and loads/stores data to and from RAM. In these
+    lines, it is moving the value 0x0e into register "ah", and the value 'H' (ASCII) into the register "al"</p>
+<div class="codeblock">
+    <p>
+        int 0x10
+    </p>
+</div>
+<p>This instruction calls interrupt 0x10, the <a href="https://en.wikipedia.org/wiki/INT_10H" target="_blank">BIOS
+        interrupt for video services</a>. It uses the data in the ah and al registers. 0x0e is the teletype output mode,
+    'H' is the data that gets printed.</p>
+<div class="codeblock">
     <p>
         times 510 - ($ - $$) db 0
     </p>
-    </div>
-    <p>This is a bit of a tricky instruction. The dollar signs are $ = current line position and $$ = beginning line position. This calculates the length of the current section (the distance from our [org 0x7c00] line). We tell the assembler to put zeroes (db 0) 510 times minus the length of the section. This will make sense in a moment.</p>
-    <div class="codeblock">
+</div>
+<p>This is a bit of a tricky instruction. The dollar signs are $ = current line position and $$ = beginning line
+    position. This calculates the length of the current section (the distance from our [org 0x7c00] line). We tell the
+    assembler to put zeroes (db 0) 510 times minus the length of the section. This will make sense in a moment.</p>
+<div class="codeblock">
     <p>dw 0xAA55
     </p>
-    </div>
-    <p>We padded the boot sector with zeroes because we need to put the magic number 0xAA55 at the end of the boot sector, as mentioned in the beginning of this section.</p>
-    <p>It should be noted that "db" is "define byte" and "dw" is "define word". Define tells the assembler to put data in the binary, and byte/word are sizes of data in assembly. A byte is 8 bits, a word is 16 bits. Each character of hex is 4 bits (0xAA55 is 4 digits * 4 bits).</p>
+</div>
+<p>We padded the boot sector with zeroes because we need to put the magic number 0xAA55 at the end of the boot sector,
+    as mentioned in the beginning of this section.</p>
+<p>It should be noted that "db" is "define byte" and "dw" is "define word". Define tells the assembler to put data in
+    the binary, and byte/word are sizes of data in assembly. A byte is 8 bits, a word is 16 bits. Each character of hex
+    is 4 bits (0xAA55 is 4 digits * 4 bits).</p>
+
+<br>
+<div class='bottom-nav'>
+    <a href="pre-reqs.html"><button class="back-day">Back</button></a>
+    <a href="day2.html"><button class="next-day">Next</button></a>
+</div>
+<br>
 {% endblock %}
