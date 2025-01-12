@@ -27,6 +27,6 @@ To Run this website, there are a few requirements.
 To run the website, run the command:
    ```bash
    python3 app.py
-## License
+
 
 
