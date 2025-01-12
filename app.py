@@ -31,6 +31,10 @@ def learning():
 def learning_day(day):
     return render_template(f'learning/days/{escape(day)}')
 
+@app.route('/learning/resources/')
+def learning_resources():
+    return render_template('learning/resources.html')
+
 
 @app.route('/learning/downloads/<file>')
 def learning_file(file):
