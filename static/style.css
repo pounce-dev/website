@@ -116,4 +116,42 @@ code {
     padding: 2px 4px;
     border-radius: 4px;
   }
+
+  
+
+  .back-day {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .back-day:hover {
+    background-color: #333333;
+  }
+  
+  .next-day {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .next-day:hover {
+    background-color: #333333;
+  }
   
