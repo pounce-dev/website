@@ -1,5 +1,23 @@
 {% extends 'default_page.html' %}
 {% block title %}Building{% endblock %}
 {% block content %}
+<h1>Building the Kernel</h1>
+<h2>Requisites</h2>
+<ul>
+    <li>If on Windows, put these precompiled binaries (x86_64) into your path: <a
+            href="https://github.com/lordmilko/i686-elf-tools/releases/tag/13.2.0"
+            target="_blank">https://github.com/lordmilko/i686-elf-tools/releases/tag/13.2.0</a></li>
+    <li>Install make (chocolatey or mingw for Windows)</li>
+    <li>Install nasm</li>
+    <li>Install qemu</li>
+</ul>
+<h2>Building</h2>
+<p>Make sure that all of the above software is accessible through your shell (put everything in path!)</p>
+<p>Run this in the <code>src</code> directory:</p>
+<pre><code>make run arch=x86</code></pre>
+<p>or</p> 
+<pre><code>make run arch=x86_64</code></pre>
 
+<p>The current version of our kernel and build instructions is found on github at <a
+        href="https://github.com/pounce-dev/kitty">https://github.com/pounce-dev/kitty</a>.</p>
 {% endblock %}
